@@ -19,6 +19,6 @@ export async function POST(req:Request){
    const r=await groq.chat.completions.create({model:"openai/gpt-oss-20b",messages:[{role:"system",content:system},{role:"user",content:user}]});
    return NextResponse.json({answer:r.choices[0]?.message?.content||"No response."});
   }
-  return NextResponse.json({error:"No AI provider configured."},{status:503});
+  return NextResponse.json({answer:"Demo mode: Aku Code is running without an AI key. Upload a ZIP and ask about your project; once a server-side Gemini or Groq key is configured, real AI responses will be used.\n\nYour question: "+prompt});
  }catch(e){console.error(e);return NextResponse.json({error:"AI request failed."},{status:500})}
 }
