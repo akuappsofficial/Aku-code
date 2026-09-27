@@ -24,16 +24,17 @@
 <main>
   <header class="topbar">
     <div class="workspace"><span class="eyebrow">WORKSPACE</span><strong id="projectName">New project</strong></div>
-    <a href="https://github.com/akuappsofficial/Aku-code" target="_blank" rel="noopener">GitHub ↗</a>
+    <div class="top-actions"><span class="live-badge"><i></i> LIVE STREAM</span><a href="https://github.com/akuappsofficial/Aku-code" target="_blank" rel="noopener">GitHub ↗</a></div>
   </header>
 
   <section id="chat" class="view">
     <div class="hero">
       <div class="hero-mark">⌘</div>
+      <div class="hero-live"><i></i> Streaming responses</div>
       <h2>Build with Aku Code</h2>
       <p>Ask questions, debug code, and understand your project with AI.</p>
     </div>
-    <div id="msgs" class="messages"></div>
+    <div id="msgs" class="messages" aria-live="polite"></div>
     <div class="composer">
       <textarea id="q" rows="4" placeholder="Ask about code, bugs, architecture, or ideas..."></textarea>
       <div class="composer-row">
@@ -42,6 +43,7 @@
         <button id="send" class="send">Send ↵</button>
       </div>
     </div>
+    <div class="composer-hint">Enter to send · Shift + Enter for a new line · Responses stream live</div>
   </section>
 
   <section id="files" class="view narrow hide">
