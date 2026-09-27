@@ -1,72 +1,71 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#08090b">
-<title>Aku Code</title>
-<link rel="stylesheet" href="style.css">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#08090b"><title>Aku Code</title><link rel="stylesheet" href="style.css">
 </head>
 <body>
 <aside class="sidebar">
-  <div class="brand">
-    <div class="brand-mark">⌘</div>
-    <div><h1>Aku Code</h1><p>by Aku Apps</p></div>
-  </div>
+  <div class="brand"><div class="brand-mark">⌘</div><div><h1>Aku Code</h1><p>by Aku Apps</p></div></div>
+  <button id="newSession" class="new-session">＋ New chat</button>
+  <div class="side-label">CHAT SESSIONS</div><div id="sessions" class="sessions"></div>
   <nav>
-    <button class="nav active" data-v="chat"><span class="nav-icon">⌂</span><span>Chat</span></button>
-    <button class="nav" data-v="files"><span class="nav-icon">▤</span><span>Explorer</span></button>
-    <button class="nav" data-v="about"><span class="nav-icon">⚙</span><span>Settings</span></button>
+    <button class="nav active" data-v="chat"><span>⌂</span><span>Chat</span></button>
+    <button class="nav" data-v="files"><span>▤</span><span>Explorer</span></button>
+    <button class="nav" data-v="about"><span>⚙</span><span>Settings</span></button>
   </nav>
   <div class="sidebar-bottom"><span class="status-dot"></span><span id="connectionText">Groq key not configured</span></div>
 </aside>
 
 <main>
-  <header class="topbar">
-    <div class="workspace"><span class="eyebrow">WORKSPACE</span><strong id="projectName">New project</strong></div>
-    <div class="top-actions"><span class="live-badge"><i></i> LIVE STREAM</span><div class="top-actions"><span class="live-badge"><i></i> LIVE STREAM</span><a href="https://github.com/akuappsofficial/Aku-code" target="_blank" rel="noopener">GitHub ↗</a></div></div>
-  </header>
+<header class="topbar">
+  <div class="workspace"><span class="eyebrow">WORKSPACE</span><strong id="projectName">New project</strong></div>
+  <div class="top-actions"><span class="live-badge"><i></i> LIVE BUILD</span><a href="https://github.com/akuappsofficial/Aku-code" target="_blank" rel="noopener">GitHub ↗</a></div>
+</header>
 
-  <section id="chat" class="view">
-    <div class="hero">
-      <div class="hero-mark">⌘</div>
-      <div class="hero-live"><i></i> Streaming responses</div>
-      <h2>Build with Aku Code</h2>
-      <p>Ask questions, debug code, and understand your project with AI.</p>
-    </div>
-    <div id="msgs" class="messages" aria-live="polite"></div>
-    <div class="composer">
-      <textarea id="q" rows="4" placeholder="Ask about code, bugs, architecture, or ideas..."></textarea>
-      <div class="composer-row">
-        <label class="upload">＋ Upload ZIP<input id="zip" type="file" accept=".zip"></label>
-        <span id="fileCount" class="context-label">No project attached</span>
-        <button id="send" class="send">Send ↵</button>
+<section id="chat" class="view chat-view">
+  <div class="hero"><div class="hero-mark">⌘</div><div class="hero-live"><i></i> AI coding workspace</div><h2>Build with Aku Code</h2><p>Describe what you want. Aku Code streams the work, writes files, and updates the preview live.</p></div>
+
+  <div class="buildbar" id="buildbar"><div class="build-left"><span class="build-dot"></span><strong id="buildTitle">Ready</strong><span id="buildStatus">Workspace ready</span></div><div class="build-files" id="buildFiles"></div></div>
+
+  <div class="workspace-grid">
+    <aside class="file-panel">
+      <div class="panel-head"><span>WORKSPACE</span><button id="clearWorkspace" title="Clear generated workspace">Clear</button></div>
+      <div id="workspaceFiles" class="workspace-files"><div class="empty-mini">Files will appear here as Aku builds.</div></div>
+    </aside>
+    <div class="chat-panel">
+      <div id="msgs" class="messages" aria-live="polite"></div>
+      <div class="composer">
+        <textarea id="q" rows="4" placeholder="Build a landing page, fix a bug, add a component..."></textarea>
+        <div class="composer-row"><label class="upload">＋ Upload ZIP<input id="zip" type="file" accept=".zip"></label><span id="fileCount" class="context-label">No project attached</span><button id="send" class="send">Build ↵</button></div>
       </div>
+      <div class="composer-hint">Enter to build · Shift + Enter for a new line · Files and preview update while streaming</div>
     </div>
-    <div class="composer-hint">Enter to send · Shift + Enter for a new line · Responses stream live</div>
-  </section>
+    <aside class="preview-panel">
+      <div class="panel-head"><span><i class="preview-dot"></i> LIVE PREVIEW</span><button id="refreshPreview">Refresh</button></div>
+      <div id="previewEmpty" class="preview-empty"><div>◫</div><strong>Preview will appear here</strong><span>Build an HTML/CSS/JS project to see it live.</span></div>
+      <iframe id="preview" title="Aku Code live preview" sandbox="allow-scripts allow-forms allow-modals allow-popups"></iframe>
+    </aside>
+  </div>
+</section>
 
-  <section id="files" class="view narrow hide">
-    <div class="page-head"><span class="eyebrow">PROJECT</span><h2>Explorer</h2><p>Files from your ZIP stay in your browser and are included only when you ask a question.</p></div>
-    <div id="list" class="card empty">No project uploaded yet.</div>
-  </section>
+<section id="files" class="view narrow hide">
+  <div class="page-head"><span class="eyebrow">PROJECT</span><h2>Explorer</h2><p>Your current workspace and uploaded project files live in this browser.</p></div>
+  <div id="list" class="card empty">No project uploaded yet.</div>
+</section>
 
-  <section id="about" class="view narrow hide">
-    <div class="page-head"><span class="eyebrow">CONFIGURATION</span><h2>Groq</h2><p>Connect Aku Code to Groq directly from this browser.</p></div>
-    <div class="card settings">
-      <div class="field">
-        <label for="groqKey">Groq API key</label>
-        <input id="groqKey" type="password" autocomplete="off" spellcheck="false" placeholder="gsk_…">
-      </div>
-      <label class="remember"><input id="rememberGroq" type="checkbox"><span>Save locally on this device</span></label>
-      <button id="saveGroq" class="save-key">Save key</button>
-      <p class="hint">Your key is stored in this browser only. GitHub Actions Secrets are not exposed to a static GitHub Pages site at runtime.</p>
-      <div id="health" class="health">Add your Groq API key in Settings</div>
-    </div>
-  </section>
+<section id="about" class="view narrow hide">
+  <div class="page-head"><span class="eyebrow">CONFIGURATION</span><h2>Groq + Memory</h2><p>Connect Groq and keep chat sessions, workspace files, and project context on this device.</p></div>
+  <div class="card settings">
+    <div class="field"><label for="groqKey">Groq API key</label><input id="groqKey" type="password" autocomplete="off" spellcheck="false" placeholder="gsk_…"></div>
+    <label class="remember"><input id="rememberGroq" type="checkbox"><span>Save key locally on this device</span></label>
+    <button id="saveGroq" class="save-key">Save key</button>
+    <div id="memoryStatus" class="health">Memory: local chat sessions enabled</div>
+    <p class="hint">Sessions, workspace files, and project memory are stored locally in this browser. GitHub Actions Secrets are not exposed to a static Pages site.</p>
+    <div id="health" class="health">Add your Groq API key in Settings</div>
+  </div>
+</section>
 </main>
-
 <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
 <script src="script.js"></script>
-</body>
-</html>
+</body></html>
