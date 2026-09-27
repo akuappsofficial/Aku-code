@@ -26,7 +26,7 @@
 <section id="chat" class="view chat-view">
   <div class="hero"><div class="hero-mark">⌘</div><div class="hero-live"><i></i> AI coding workspace</div><h2>Build with Aku Code</h2><p>Describe what you want. Aku Code streams the work, writes files, and updates the preview live.</p></div>
 
-  <div class="buildbar" id="buildbar"><div class="build-left"><span class="build-dot"></span><strong id="buildTitle">Ready</strong><span id="buildStatus">Workspace ready</span></div><div class="build-files" id="buildFiles"></div></div>
+  <div class="modebar"><span class="mode-label">MODE</span><button class="mode-btn active" data-mode="code">⌘ Code</button><button class="mode-btn" data-mode="chat">◌ Chat</button><span id="modeHint">Build files, edit code, and stream a live preview</span></div>\n\n  <div class="buildbar" id="buildbar"><div class="build-left"><span class="build-dot"></span><strong id="buildTitle">Ready</strong><span id="buildStatus">Workspace ready</span></div><div class="build-files" id="buildFiles"></div></div>
 
   <div class="workspace-grid">
     <aside class="file-panel">
@@ -39,7 +39,7 @@
         <textarea id="q" rows="4" placeholder="Build a landing page, fix a bug, add a component..."></textarea>
         <div class="composer-row"><label class="upload">＋ Upload ZIP<input id="zip" type="file" accept=".zip"></label><span id="fileCount" class="context-label">No project attached</span><button id="send" class="send">Build ↵</button></div>
       </div>
-      <div class="composer-hint">Enter to build · Shift + Enter for a new line · Files and preview update while streaming</div>
+      <div class="composer-hint">Enter to send · Shift + Enter for a new line · <span id="streamHint">tokens stream instantly</span></div>
     </div>
     <aside class="preview-panel">
       <div class="panel-head"><span><i class="preview-dot"></i> LIVE PREVIEW</span><button id="refreshPreview">Refresh</button></div>
